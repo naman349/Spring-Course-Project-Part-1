@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop
+        http://www.pringframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="user1" class="com.upgrad.hirewheels.practice.Users" >
+        <property name="userId" value="1" />
+        <property name="firstName" value="NAMAN" />
+        <property name="lastName" value="Mittal" />
+        <property name="password" value="mnaman42@" />
+        <property name="email" value="mnaman42@gmail.com" />
+        <property name="mobileNumber" value="7457030433" />
+        <property name="walletMoney" value="1000" />
+    </bean>
+    <bean id="userBalanceImpl" class="com.upgrad.hirewheels.practice.BalanceService">
+    </bean>
+    <!--    <bean id="userBalanceImpl" class="com.upgrad.hirewheels.practice.UserBalanceImpl"> </bean>-->
+
+    <bean id="balanceService" class="com.upgrad.hirewheels.practice.BalanceService"> </bean>
+
+</beans>
