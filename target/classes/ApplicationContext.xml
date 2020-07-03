@@ -15,19 +15,37 @@
 		http://www.springframework.org/schema/aop
         http://www.pringframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="user1" class="com.upgrad.hirewheels.practice.Users" >
+
+    <context:annotation-config/>
+    <bean id="user1" class="com.upgrad.hirewheels.practice.Users" autowire="byType">
         <property name="userId" value="1" />
         <property name="firstName" value="NAMAN" />
         <property name="lastName" value="Mittal" />
         <property name="password" value="mnaman42@" />
         <property name="email" value="mnaman42@gmail.com" />
         <property name="mobileNumber" value="7457030433" />
-        <property name="walletMoney" value="1000" />
+        <property name="walletMoney" value="10000" />
     </bean>
-    <bean id="userBalanceImpl" class="com.upgrad.hirewheels.practice.BalanceService">
-    </bean>
+<!--    <bean id="userBalanceImpl" class="com.upgrad.hirewheels.practice.BalanceService">-->
+<!--    </bean>-->
     <!--    <bean id="userBalanceImpl" class="com.upgrad.hirewheels.practice.UserBalanceImpl"> </bean>-->
 
     <bean id="balanceService" class="com.upgrad.hirewheels.practice.BalanceService"> </bean>
+
+    <bean id="user2" class="com.upgrad.hirewheels.practice.Users">
+        <property name="userId" value="2" />
+        <property name="firstName" value="Naman" />
+        <property name="lastName" value="Mittal" />
+        <property name="password" value="1234567890" />
+        <property name="email" value="mnaman567@gmail.com" />
+        <property name="mobileNumber" value="8858584758" />
+        <property name="walletMoney" value="250000" />
+    </bean>
+
+    <bean id="userService" class="com.upgrad.hirewheels.practice.UserService" >
+        <!--<property name="users" ref="user2" />-->
+    </bean>
+
+
 
 </beans>

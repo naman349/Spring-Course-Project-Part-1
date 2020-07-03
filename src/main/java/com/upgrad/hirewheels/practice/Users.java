@@ -14,6 +14,15 @@ public class Users {
     private String email;
     private String mobileNumber;
     private float walletMoney;
+    private BalanceService balanceService;
+
+    public BalanceService getBalanceService() {
+        return balanceService;
+    }
+
+    public void setBalanceService(BalanceService balanceService) {
+        this.balanceService = balanceService;
+    }
 
     public int getUserId() {
         return userId;
@@ -81,6 +90,7 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", walletMoney=" + walletMoney +
+                ", balanceService=" + balanceService +
                 '}';
     }
 }
