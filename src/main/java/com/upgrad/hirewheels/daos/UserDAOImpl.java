@@ -54,4 +54,17 @@ public class UserDAOImpl implements UserDAO {
         entityManager.close();
         return true;
     }
+
+    @Override
+    public User loginUser(String email, String password) {
+        return entityManagerFactory.createEntityManager().find(User.class, email, LockModeType.valueOf(password));
+    }
+
+//
+//    @Override
+//    public User forgotPassword(String password) {
+//        return entityManagerFactory.createEntityManager().find();;
+//    }
+
+
 }

@@ -3,16 +3,32 @@ package com.upgrad.hirewheels.models;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Activity {
-
-
     @Id
     private int activityId;
-    @Column(nullable = false)
+
+
+    @Column(nullable = false,unique = true)
     private String activityType;
 
+    public String getActivityType() {
+        return activityType;
+    }
 
-public Activity(){}
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+    //Default constructor
+    public Activity(){}
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "activityId=" + activityId +
+                ", activityType='" + activityType + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

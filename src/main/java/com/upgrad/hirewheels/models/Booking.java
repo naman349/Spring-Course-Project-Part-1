@@ -3,7 +3,7 @@ package com.upgrad.hirewheels.models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
-
+@Entity
 public class Booking {
     @Id
     private int bookingId;
@@ -50,6 +50,20 @@ public class Booking {
     @Override
     public int hashCode() {
         return Objects.hash(bookingId, pickupDate, dropoffDate, bookingDate, amount, locationId, vehicleId, UserId);
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "bookingId=" + bookingId +
+                ", pickupDate=" + pickupDate +
+                ", dropoffDate=" + dropoffDate +
+                ", bookingDate=" + bookingDate +
+                ", amount=" + amount +
+                ", locationId=" + locationId +
+                ", vehicleId=" + vehicleId +
+                ", UserId=" + UserId +
+                '}';
     }
 }
 

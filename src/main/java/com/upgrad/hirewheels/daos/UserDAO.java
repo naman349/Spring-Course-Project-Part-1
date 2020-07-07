@@ -14,4 +14,10 @@ public interface UserDAO {
     public List<User> fetchAllUsersDetails();
     public boolean deleteUser(int userId);
 
+
+    //in this user login through emailid and password
+    public User loginUser(String email,String password);
+
+   // public User forgotPassword(String password);
+
 }

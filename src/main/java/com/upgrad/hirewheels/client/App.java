@@ -24,21 +24,34 @@ public class App {
         UserService userService = (UserService) context.getBean("userService");
         System.out.println(userService);
 
-        System.out.println("-------------------------------------Checkpoint 3 Solution---------------------------------------");
-        User user = new User("mnama42@gmail","naman","mittal","7457030433","12345678",10000.0f,1);
+        System.out.println("In this state checkpoint 3 start  INSERT NEW USER INTO THE DATABASE");
+        User user = new User("mnama42@gmail","naman","mittal","7457030933","12345678",10000.0f,1);
+
 
         UserDAO userDAO = (UserDAO) context.getBean("userDAO");
 
-//        System.out.println("-------------------------------------Inserted Users Details---------------------------------------");
+       System.out.println("Inserted  THE DATABASE TABLE Details");
         User savedUser;
         userDAO.insertUsersDetails(user);
 
-        //System.out.println("-------------------------------------Fetch All User Details---------------------------------------");
-        //System.out.println(userDAO.fetchAllUsersDetails());
-        //System.out.println("-------------------------------------Fetch User Details by Id---------------------------------------");
-        //System.out.println(userDAO.fetchUserDetails(2));
-        //System.out.println("-------------------------------------Deleted User Detail by Id---------------------------------------");
-        //System.out.println(userDAO.deleteUser(2));
+        System.out.println("Fetch All User Details");
+        System.out.println(userDAO.fetchAllUsersDetails());
+
+        System.out.println("Fetch User Details by Id");
+        System.out.println(userDAO.fetchUserDetails(2));
+
+        System.out.println("Deleted User Detail by Id");
+        System.out.println(userDAO.deleteUser(2));
+
+//In that point checkpoint 4 implemented
+
+        System.out.println("In this implement login through email nad password");
+
+        System.out.println(userDAO.loginUser("mnaman42@gmail.com","12345678"));
+
+
+
+
 
 
 
