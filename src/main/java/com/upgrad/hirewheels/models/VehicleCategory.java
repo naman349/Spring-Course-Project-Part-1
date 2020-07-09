@@ -1,22 +1,29 @@
 package com.upgrad.hirewheels.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class VehicleCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int vehicleCategoryId;
+    private int vehicleCategoryId;
 
+    @Column(nullable = false, unique = true)
+    private String vehicleCategoryName;
 
+    @OneToMany(mappedBy = "vehicleCategory")
+    private List<VehicleSubCategory> vehicleSubCategory;
 
-    @Column(nullable = false,unique = true)
-    private  String vehicleCategoryName;
+    public int getVehicleCategoryId() {
+        return vehicleCategoryId;
+    }
 
-    public  VehicleCategory(){}
+    public void setVehicleCategoryId(int vehicleCategoryId) {
+        this.vehicleCategoryId = vehicleCategoryId;
+    }
 
     public String getVehicleCategoryName() {
         return vehicleCategoryName;
@@ -24,6 +31,20 @@ public class VehicleCategory {
 
     public void setVehicleCategoryName(String vehicleCategoryName) {
         this.vehicleCategoryName = vehicleCategoryName;
+    }
+
+    public VehicleCategory(){}
+
+    public VehicleCategory(String vehicleCategoryName) {
+        this.vehicleCategoryName = vehicleCategoryName;
+    }
+
+    @Override
+    public String toString() {
+        return "VehicleCategory{" +
+                "vehicleCategoryId=" + vehicleCategoryId +
+                ", vehicleCategoryName='" + vehicleCategoryName + '\'' +
+                '}';
     }
 
     @Override
@@ -38,14 +59,5 @@ public class VehicleCategory {
     @Override
     public int hashCode() {
         return Objects.hash(vehicleCategoryId, vehicleCategoryName);
-    }
-
-
-    @Override
-    public String toString() {
-        return "VehicleCategory{" +
-                "vehicleCategoryId=" + vehicleCategoryId +
-                ", vehicleCategoryName='" + vehicleCategoryName + '\'' +
-                '}';
     }
 }

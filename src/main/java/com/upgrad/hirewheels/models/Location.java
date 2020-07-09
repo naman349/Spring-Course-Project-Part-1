@@ -1,6 +1,5 @@
 package com.upgrad.hirewheels.models;
 
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,21 +8,27 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-private int locationId;
+    private int locationId;
 
     @Column(nullable = false)
-private String locationName;
+    private String locationName;
 
     @Column(nullable = false)
-private String address;
+    private String address;
+
+    @OneToOne
+    private City city;
 
     @Column(nullable = false)
-private int cityId;
-    @Column(nullable = false)
-private  int pincode;
+    private int pincode;
 
-    public Location(){}
+    public int getLocationId() {
+        return locationId;
+    }
 
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
 
     public String getLocationName() {
         return locationName;
@@ -41,14 +46,6 @@ private  int pincode;
         this.address = address;
     }
 
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
-
     public int getPincode() {
         return pincode;
     }
@@ -57,21 +54,12 @@ private  int pincode;
         this.pincode = pincode;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Location location = (Location) o;
-        return locationId == location.locationId &&
-                cityId == location.cityId &&
-                pincode == location.pincode &&
-                Objects.equals(locationName, location.locationName) &&
-                Objects.equals(address, location.address);
-    }
+    public Location() {}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(locationId, locationName, address, cityId, pincode);
+    public Location(String locationName, String address, int cityId, int pincode) {
+        this.locationName = locationName;
+        this.address = address;
+        this.pincode = pincode;
     }
 
     @Override
@@ -80,8 +68,23 @@ private  int pincode;
                 "locationId=" + locationId +
                 ", locationName='" + locationName + '\'' +
                 ", address='" + address + '\'' +
-                ", cityId=" + cityId +
                 ", pincode=" + pincode +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return locationId == location.locationId &&
+                pincode == location.pincode &&
+                Objects.equals(locationName, location.locationName) &&
+                Objects.equals(address, location.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(locationId, locationName, address, pincode);
     }
 }

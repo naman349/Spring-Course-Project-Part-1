@@ -1,3 +1,4 @@
+
 package com.upgrad.hirewheels.models;
 
 import javax.persistence.*;
@@ -9,8 +10,9 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int roleId;
-    @Column( nullable = false,unique=true)
-    private  String roleName;
+
+    @Column(nullable = false, unique = true)
+    private String roleName;
 
     public int getRoleId() {
         return roleId;
@@ -27,7 +29,21 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-    public Role(){}
+
+
+    public Role() {}
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -41,13 +57,5 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(roleId, roleName);
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName='" + roleName + '\'' +
-                '}';
     }
 }

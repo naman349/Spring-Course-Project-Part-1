@@ -1,41 +1,58 @@
+
 package com.upgrad.hirewheels.models;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class VehicleSubCategory {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int vehicleSubCategoryId;
 
-    @Column( nullable = false,unique=true)
-    private  String vehicleSubCategoryName;
+    @Column(nullable = false, unique = true)
+    private String vehicleSubCategoryName;
 
-    @Column( nullable = false)
-    private float pricePerHour;
+    @Column(nullable = false)
+    private int pricePerHour;
 
-    @Column( nullable = false)
-    private  int vehicleCategoryId;
+    @ManyToOne
+    private VehicleCategory vehicleCategory;
 
-    public VehicleSubCategory(){}
+    public int getVehicleSubCategoryId() {
+        return vehicleSubCategoryId;
+    }
 
-    public String getVehicleSubCategoryName() {
+    public void setVehicleSubCategoryId(int vehicleSubCategoryId) {
+        this.vehicleSubCategoryId = vehicleSubCategoryId;
+    }
+
+    public String getVehicleSubcategoryName() {
         return vehicleSubCategoryName;
     }
 
-    public void setVehicleSubCategoryName(String vehicleSubCategoryName) {
-        this.vehicleSubCategoryName = vehicleSubCategoryName;
+    public void setVehicleSubcategoryName(String vehicleSubcategoryName) {
+        this.vehicleSubCategoryName = vehicleSubcategoryName;
     }
 
-    public float getPricePerHour() {
+    public int getPricePerHour() {
         return pricePerHour;
     }
 
-    public void setPricePerHour(float pricePerHour) {
+    public void setPricePerHour(int pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
+
+
+    public VehicleSubCategory() {}
+
+    public VehicleSubCategory(String vehicleSubcategoryName, int pricePerHour) {
+        this.vehicleSubCategoryName = vehicleSubcategoryName;
+        this.pricePerHour = pricePerHour;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -43,23 +60,13 @@ public class VehicleSubCategory {
         if (o == null || getClass() != o.getClass()) return false;
         VehicleSubCategory that = (VehicleSubCategory) o;
         return vehicleSubCategoryId == that.vehicleSubCategoryId &&
-                Float.compare(that.pricePerHour, pricePerHour) == 0 &&
-                vehicleCategoryId == that.vehicleCategoryId &&
-                Objects.equals(vehicleSubCategoryName, that.vehicleSubCategoryName);
+                pricePerHour == that.pricePerHour &&
+                Objects.equals(vehicleSubCategoryName, that.vehicleSubCategoryName) &&
+                Objects.equals(vehicleCategory, that.vehicleCategory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(vehicleSubCategoryId, vehicleSubCategoryName, pricePerHour, vehicleCategoryId);
-    }
-
-    @Override
-    public String toString() {
-        return "VehicleSubCategory{" +
-                "vehicleSubCategoryId=" + vehicleSubCategoryId +
-                ", vehicleSubCategoryName='" + vehicleSubCategoryName + '\'' +
-                ", pricePerHour=" + pricePerHour +
-                ", vehicleCategoryId=" + vehicleCategoryId +
-                '}';
+        return Objects.hash(vehicleSubCategoryId, vehicleSubCategoryName, pricePerHour, vehicleCategory);
     }
 }

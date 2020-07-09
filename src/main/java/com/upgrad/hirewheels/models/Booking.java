@@ -3,16 +3,19 @@ package com.upgrad.hirewheels.models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+
 @Entity
 public class Booking {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookingId;
 
     @Column(nullable = false)
     private Date pickupDate;
 
     @Column(nullable = false)
-    private Date dropoffDate;
+    private Date dropOffDate;
 
     @Column(nullable = false)
     private Date bookingDate;
@@ -20,17 +23,74 @@ public class Booking {
     @Column(nullable = false)
     private float amount;
 
-    @Column(nullable = false)
-    private int locationId;
+    @OneToOne
+    private Location location;
 
-    @Column(nullable = false)
-    private int vehicleId;
+    @OneToOne
+    private Vehicle vehicle;
 
-    @Column(nullable = false)
-    private int UserId;
+    @OneToOne
+    private User userId;
 
+    public int getBookingId() {
+        return bookingId;
+    }
 
-    public Booking(){}
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public Date getPickupDate() {
+        return pickupDate;
+    }
+
+    public void setPickupDate(Date pickupDate) {
+        this.pickupDate = pickupDate;
+    }
+
+    public Date getDropOffDate() {
+        return dropOffDate;
+    }
+
+    public void setDropOffDate(Date dropOffDate) {
+        this.dropOffDate = dropOffDate;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
+    public Booking() {}
+
+    public Booking(Date pickupDate, Date dropOffDate, Date bookingDate, float amount) {
+        this.pickupDate = pickupDate;
+        this.dropOffDate = dropOffDate;
+        this.bookingDate = bookingDate;
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "bookingId=" + bookingId +
+                ", pickupDate=" + pickupDate +
+                ", dropOffDate=" + dropOffDate +
+                ", bookingDate=" + bookingDate +
+                ", amount=" + amount +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -39,37 +99,13 @@ public class Booking {
         Booking booking = (Booking) o;
         return bookingId == booking.bookingId &&
                 Float.compare(booking.amount, amount) == 0 &&
-                locationId == booking.locationId &&
-                vehicleId == booking.vehicleId &&
-                UserId == booking.UserId &&
                 Objects.equals(pickupDate, booking.pickupDate) &&
-                Objects.equals(dropoffDate, booking.dropoffDate) &&
+                Objects.equals(dropOffDate, booking.dropOffDate) &&
                 Objects.equals(bookingDate, booking.bookingDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookingId, pickupDate, dropoffDate, bookingDate, amount, locationId, vehicleId, UserId);
-    }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "bookingId=" + bookingId +
-                ", pickupDate=" + pickupDate +
-                ", dropoffDate=" + dropoffDate +
-                ", bookingDate=" + bookingDate +
-                ", amount=" + amount +
-                ", locationId=" + locationId +
-                ", vehicleId=" + vehicleId +
-                ", UserId=" + UserId +
-                '}';
+        return Objects.hash(bookingId, pickupDate, dropOffDate, bookingDate, amount);
     }
 }
-
-
-
-
-
-
-

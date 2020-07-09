@@ -1,37 +1,35 @@
 package com.upgrad.hirewheels.models;
 
-//import lombok.Getter;
-//import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
-
-    //@Table(name="User_table")
-    //in this class i make User instead of Users acording to hirewheel application schema
-    @Entity
-    @Table(name="User")
-    public class User {
-
+@Entity
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String firstName;
 
-    @Column( nullable = false)
     private String lastName;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true , nullable = false)
     private String email;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true , nullable = false)
     private String mobileNumber;
 
-
+    @Column(nullable = false)
     private float walletMoney;
+
+    @OneToMany
+    List<Role> role;
+
 
     public int getUserId() {
         return userId;
@@ -89,12 +87,9 @@ import javax.persistence.*;
         this.walletMoney = walletMoney;
     }
 
+    public User() {}
 
-
-        public User() {}
-
-    public User(  String email, String firstName, String lastName, String mobileNumber,String password, float walletMoney,int userId) {
-        this.userId = userId;
+    public User(String firstName, String lastName, String password, String email, String mobileNumber, float walletMoney) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -103,16 +98,35 @@ import javax.persistence.*;
         this.walletMoney = walletMoney;
     }
 
-        @Override
-        public String toString() {
-            return "User{" +
-                    "userId=" + userId +
-                    ", firstName='" + firstName + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    ", password='" + password + '\'' +
-                    ", email='" + email + '\'' +
-                    ", mobileNumber='" + mobileNumber + '\'' +
-                    ", walletMoney=" + walletMoney +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", walletMoney=" + walletMoney +
+                '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId &&
+                Float.compare(user.walletMoney, walletMoney) == 0 &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(mobileNumber, user.mobileNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, firstName, lastName, password, email, mobileNumber, walletMoney);
+    }
+}

@@ -1,40 +1,51 @@
 package com.upgrad.hirewheels.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int vehicleId;
-    @Column( nullable = false)
+    private int vehicleId;
+
+    @Column(nullable = false)
     private String vehicleModel;
 
-    @Column( nullable = false)
-    private  int userId;
-    @Column( nullable = false)
-    private  int vehicleNumber;
+    @Column(nullable = false)
+    private int vehicleNumber;
 
-    private int vehicleSubCategoryId;
+    @Column(nullable = false)
+    private String color;
+
+    @Column(nullable = false)
+    private String vehicleImageUrl;
+
+/*
+    @OneToMany
+    @JoinTable(name = "vehicleSubcategory")
+    @JoinColumn(name = "vehicleSubcategoryId")
+    private List<VehicleSubcategory> vehicleSubcategory;
+*/
+
+    @OneToOne
+    User user;
+
+    @OneToOne
+    Location location;
+
+    @OneToOne
+    FuelType fuelType;
 
 
+    public int getVehicleId() {
+        return vehicleId;
+    }
 
-    @Column( nullable = false)
-    private  String color;
-
-
-    @Column( nullable = false)
-    private int localId;
-    @Column( nullable = false)
-    private  int fuelTypeId;
-    @Column( nullable = false)
-    private  String vehicleImageUrl;
-
-//default constructer
-    public Vehicle(){}
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
 
     public String getVehicleModel() {
         return vehicleModel;
@@ -42,14 +53,6 @@ public class Vehicle {
 
     public void setVehicleModel(String vehicleModel) {
         this.vehicleModel = vehicleModel;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public int getVehicleNumber() {
@@ -60,36 +63,19 @@ public class Vehicle {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public int getVehicleSubCategoryId() {
-        return vehicleSubCategoryId;
+    /*public int getVehicleSubcategoryId() {
+        return vehicleSubcategoryId;
     }
-
-    public void setVehicleSubCategoryId(int vehicleSubCategoryId) {
-        this.vehicleSubCategoryId = vehicleSubCategoryId;
+    public void setVehicleSubcategoryId(int vehicleSubcategoryId) {
+        this.vehicleSubcategoryId = vehicleSubcategoryId;
     }
-
+*/
     public String getColor() {
         return color;
     }
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public int getLocalId() {
-        return localId;
-    }
-
-    public void setLocalId(int localId) {
-        this.localId = localId;
-    }
-
-    public int getFuelTypeId() {
-        return fuelTypeId;
-    }
-
-    public void setFuelTypeId(int fuelTypeId) {
-        this.fuelTypeId = fuelTypeId;
     }
 
     public String getVehicleImageUrl() {
@@ -100,25 +86,14 @@ public class Vehicle {
         this.vehicleImageUrl = vehicleImageUrl;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vehicle vehicle = (Vehicle) o;
-        return vehicleId == vehicle.vehicleId &&
-                userId == vehicle.userId &&
-                vehicleNumber == vehicle.vehicleNumber &&
-                vehicleSubCategoryId == vehicle.vehicleSubCategoryId &&
-                localId == vehicle.localId &&
-                fuelTypeId == vehicle.fuelTypeId &&
-                Objects.equals(vehicleModel, vehicle.vehicleModel) &&
-                Objects.equals(color, vehicle.color) &&
-                Objects.equals(vehicleImageUrl, vehicle.vehicleImageUrl);
-    }
+    public Vehicle() {}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(vehicleId, vehicleModel, userId, vehicleNumber, vehicleSubCategoryId, color, localId, fuelTypeId, vehicleImageUrl);
+    public Vehicle(String vehicleModel, int vehicleNumber, String color, String vehicleImageUrl) {
+        this.vehicleModel = vehicleModel;
+        this.vehicleNumber = vehicleNumber;
+        //      this.vehicleSubcategoryId = vehicleSubcategoryId;
+        this.color = color;
+        this.vehicleImageUrl = vehicleImageUrl;
     }
 
     @Override
@@ -126,13 +101,27 @@ public class Vehicle {
         return "Vehicle{" +
                 "vehicleId=" + vehicleId +
                 ", vehicleModel='" + vehicleModel + '\'' +
-                ", userId=" + userId +
                 ", vehicleNumber=" + vehicleNumber +
-                ", vehicleSubCategoryId=" + vehicleSubCategoryId +
                 ", color='" + color + '\'' +
-                ", localId=" + localId +
-                ", fuelTypeId=" + fuelTypeId +
                 ", vehicleImageUrl='" + vehicleImageUrl + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return vehicleId == vehicle.vehicleId &&
+                vehicleNumber == vehicle.vehicleNumber &&
+//                vehicleSubcategoryId == vehicle.vehicleSubcategoryId &&
+                Objects.equals(vehicleModel, vehicle.vehicleModel) &&
+                Objects.equals(color, vehicle.color) &&
+                Objects.equals(vehicleImageUrl, vehicle.vehicleImageUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vehicleId, vehicleModel, vehicleNumber, color, vehicleImageUrl);
     }
 }

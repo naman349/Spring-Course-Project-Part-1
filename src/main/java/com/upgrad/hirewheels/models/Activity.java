@@ -19,6 +19,15 @@ public class Activity {
     public void setActivityType(String activityType) {
         this.activityType = activityType;
     }
+
+    public int getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(int activityId) {
+        this.activityId = activityId;
+    }
+
     //Default constructor
     public Activity(){}
 

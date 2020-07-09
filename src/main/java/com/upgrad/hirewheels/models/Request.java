@@ -6,26 +6,32 @@ import java.util.Objects;
 @Entity
 public class Request {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int requestId;
 
-    @Column(nullable = false)
-    private int activityId;
-
+    @OneToOne
+    private Activity activity;
 
     private String userComments;
-
-
     private String adminComments;
 
+    @OneToOne
+    private RequestStatus requestStatusId;
 
-    @Column(nullable = false)
-    private int vehicleId;
+    @OneToOne
+    private Vehicle vehicle;
 
-    @Column(nullable = false)
-    private  int userId;
+    @OneToOne
+    private User user;
+
+    public int getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
+    }
 
     public String getUserComments() {
         return userComments;
@@ -43,7 +49,22 @@ public class Request {
         this.adminComments = adminComments;
     }
 
-    public Request(){}
+    public Request() {
+    }
+
+    public Request(String userComments, String adminComments) {
+        this.userComments = userComments;
+        this.adminComments = adminComments;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "requestId=" + requestId +
+                ", userComments='" + userComments + '\'' +
+                ", adminComments='" + adminComments + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,27 +72,16 @@ public class Request {
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
         return requestId == request.requestId &&
-                activityId == request.activityId &&
-                vehicleId == request.vehicleId &&
-                userId == request.userId &&
+                Objects.equals(activity, request.activity) &&
                 Objects.equals(userComments, request.userComments) &&
-                Objects.equals(adminComments, request.adminComments);
+                Objects.equals(adminComments, request.adminComments) &&
+                Objects.equals(requestStatusId, request.requestStatusId) &&
+                Objects.equals(vehicle, request.vehicle) &&
+                Objects.equals(user, request.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(requestId, activityId, userComments, adminComments, vehicleId, userId);
-    }
-
-    @Override
-    public String toString() {
-        return "Request{" +
-                "requestId=" + requestId +
-                ", activityId=" + activityId +
-                ", userComments='" + userComments + '\'' +
-                ", adminComments='" + adminComments + '\'' +
-                ", vehicleId=" + vehicleId +
-                ", userId=" + userId +
-                '}';
+        return Objects.hash(requestId, activity, userComments, adminComments, requestStatusId, vehicle, user);
     }
 }
