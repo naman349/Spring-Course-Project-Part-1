@@ -1,2 +1,2 @@
 # Spring-Course-Project-Part-1
-#Int this project I have create a hirewheelsApplication using spring core framework. It is used for renting the vichels.
+#In this project I have create a hirewheelsApplication backendApi using spring core framework. In this we can use oracle database to store entity table and ORM frame work to mapping.In this i have use JPA to implement entityand follow MVC Model.  
