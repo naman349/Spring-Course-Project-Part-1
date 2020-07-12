@@ -14,7 +14,7 @@ public class VehicleSubCategory {
     @Column(nullable = false, unique = true)
     private String vehicleSubCategoryName;
 
-
+    @Column(nullable = false)
     private int pricePerHour;
 
     @ManyToOne
